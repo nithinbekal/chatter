@@ -2,7 +2,16 @@ import {Socket} from "phoenix"
 
 class App {
   static init() {
-    console.log("Hello, world!")
+    var $message  = $("#message")
+    var $username = $("#username")
+
+    $message
+      .off("keypress")
+      .on("keypress", e => {
+        if(e.keyCode == 13) {
+          console.log(`[${$username.val()}] ${$message.val()}` )
+        }
+      })
   }
 }
 
