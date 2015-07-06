@@ -9,6 +9,10 @@ class App {
     socket.connect()
     socket.onClose( e => console.log("Closed") )
 
+    var channel = socket.chan("rooms:lobby", {})
+    channel.join()
+      .receive("error", () => console.log("Failed to connect"))
+
     $message
       .off("keypress")
       .on("keypress", e => {
