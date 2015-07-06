@@ -5,6 +5,10 @@ class App {
     var $message  = $("#message")
     var $username = $("#username")
 
+    var socket = new Socket("/ws")
+    socket.connect()
+    socket.onClose( e => console.log("Closed") )
+
     $message
       .off("keypress")
       .on("keypress", e => {
