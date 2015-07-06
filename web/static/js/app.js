@@ -12,6 +12,7 @@ class App {
     var channel = socket.chan("rooms:lobby", {})
     channel.join()
       .receive("error", () => console.log("Failed to connect"))
+      .receive("ok", () => console.log("Connected!"))
 
     $message
       .off("keypress")
