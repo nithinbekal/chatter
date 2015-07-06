@@ -1,0 +1,6 @@
+{
+  "name": "chat",
+  "dependencies": {
+    "jquery": "~ 2.1"
+  }
+}
