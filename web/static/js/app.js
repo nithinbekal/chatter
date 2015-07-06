@@ -14,11 +14,18 @@ class App {
       .receive("error", () => console.log("Failed to connect"))
       .receive("ok", () => console.log("Connected!"))
 
+    channel.on("new:message", msg => {
+      console.log(msg.body)
+    })
+
     $message
       .off("keypress")
       .on("keypress", e => {
         if(e.keyCode == 13) {
-          console.log(`[${$username.val()}] ${$message.val()}` )
+          channel.push("new:message", {
+            user: $username.val(),
+            message: $message.val()
+          })
         }
       })
   }
