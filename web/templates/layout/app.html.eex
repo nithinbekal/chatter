@@ -14,7 +14,7 @@
   <body>
     <div class="container" role="main">
       <div class="header">
-        <h1>Hello, world!</h1>
+        <h1>Chat</h1>
       </div>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
