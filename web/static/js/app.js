@@ -1,13 +1,11 @@
 import {Socket} from "phoenix"
 
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("topic:subtopic", {})
-// chan.join().receive("ok", chan => {
-//   console.log("Success!")
-// })
-
-let App = {
+class App {
+  static init() {
+    console.log("Hello, world!")
+  }
 }
+
+$( () => App.init() )
 
 export default App
