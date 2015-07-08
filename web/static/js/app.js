@@ -4,6 +4,7 @@ class App {
   static init() {
     var $message  = $("#message")
     var $username = $("#username")
+    var $messages = $("#messages")
 
     var socket = new Socket("/ws")
     socket.connect()
@@ -14,9 +15,7 @@ class App {
       .receive("error", () => console.log("Failed to connect"))
       .receive("ok", () => console.log("Connected!"))
 
-    channel.on("new:message", msg => {
-      console.log(msg.body)
-    })
+    channel.on("new:message", msg => this.appendMessage(msg))
 
     $message
       .off("keypress")
@@ -24,10 +23,21 @@ class App {
         if(e.keyCode == 13) {
           channel.push("new:message", {
             user: $username.val(),
-            message: $message.val()
+            body: $message.val()
           })
+          $message.val("")
         }
       })
+  }
+
+  static sanitize(msg) { return $("<div />").text(msg).html() }
+
+  static appendMessage(message) {
+    var $messages = $("#messages")
+    var username = this.sanitize(message.user || "New User")
+    var message  = this.sanitize(message.body)
+
+    $messages.append(`<p><b>[${username}]</b>: ${message}</p>`)
   }
 }
 

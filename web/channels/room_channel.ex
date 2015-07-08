@@ -6,7 +6,7 @@ defmodule Chat.RoomChannel do
   end
 
   def handle_in("new:message", msg, socket) do
-    broadcast! socket, "new:message", %{body: msg["message"]}
+    broadcast! socket, "new:message", %{body: msg["body"], user: msg["user"]}
     {:noreply, socket}
   end
 end
