@@ -12,6 +12,10 @@ defmodule Chat.Router do
     plug :accepts, ["json"]
   end
 
+  socket "/ws", Chat do
+    channel "rooms:*", RoomChannel
+  end
+
   scope "/", Chat do
     pipe_through :browser # Use the default browser stack
 
